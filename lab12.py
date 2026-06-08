@@ -20,12 +20,15 @@ else:
     
     print(f"Máy tính đã tìm thấy tổng cộng: {len(contours)} đường viền độc lập!")
     
+    # 👉 In bảng hierarchy
+    print("Bảng hierarchy (ID, Next, Previous, First_Child, Parent):")
+    for i, h in enumerate(hierarchy[0]):   # hierarchy[0] là mảng 2D (N,4)
+        next_id, prev_id, child_id, parent_id = h
+        print(f"Contour {i}: Next={next_id}, Previous={prev_id}, First_Child={child_id}, Parent={parent_id}")
+    
     # 5. VẼ CONTOUR LÊN ẢNH MÀU GỐC + ĐÁNH SỐ ID
     for i, cnt in enumerate(contours):
-        # Vẽ contour màu xanh
         cv.drawContours(img_color, contours, i, (0, 255, 0), 2)
-        
-        # Lấy bounding box để đặt số ID
         x, y, w, h = cv.boundingRect(cnt)
         cv.putText(img_color, str(i), (x, y-5), cv.FONT_HERSHEY_SIMPLEX, 0.6, (0,0,255), 2)
     
